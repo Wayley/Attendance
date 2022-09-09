@@ -20,7 +20,7 @@ function RootTabs() {
         options={{
           tabBarLabel: '首页',
           tabBarIcon: 'home',
-          tabBarColor: '#6518F4',
+          tabBarColor: '#1F65FF',
         }}
       />
       <Tab.Screen
@@ -39,7 +39,7 @@ function RootTabs() {
         options={{
           tabBarLabel: '随记',
           tabBarIcon: 'image-album',
-          tabBarColor: '#1F65FF',
+          tabBarColor: '#6518F4',
         }}
       />
       <Tab.Screen
