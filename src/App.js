@@ -10,6 +10,8 @@ import Profile from './Pages/Profile/Index';
 import UserInfo from './Pages/Profile/UserInfo';
 import Settings from './Pages/Profile/Settings';
 
+import './Locales/Calendar';
+
 const Tab = createMaterialBottomTabNavigator();
 function RootTabs() {
   return (
