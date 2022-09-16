@@ -15,7 +15,9 @@ import './Locales/Calendar';
 const Tab = createMaterialBottomTabNavigator();
 function RootTabs() {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}} initialRouteName="Home">
+    <Tab.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName="Profile">
       <Tab.Screen
         name="Home"
         component={Home}

@@ -1,25 +1,93 @@
 import * as React from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import {Text, View, StyleSheet, TouchableHighlight, Image} from 'react-native';
+import NavItem from '../../Components/NavItem';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import avatar from '../../Assets/avatar.jpg';
+const color = '#1F65FF';
+const titleProps = {numberOfLines: 1, ellipsizeMode: 'tail'};
 
 export default function Profile({navigation}) {
+  const {navigate} = navigation;
   return (
     <View style={styles.container}>
-      <Text>Profile!</Text>
-      <Button
-        title="Go to UserInfo"
-        onPress={() => navigation.navigate('UserInfo')}
-      />
-      <Button
-        title="Go to Settings"
-        onPress={() => navigation.navigate('Settings')}
-      />
+      <View style={styles.userInfo}>
+        <NavItem noBorder>
+          <View style={styles.userInfoMain}>
+            <Image source={avatar} style={styles.avatar} />
+            <View style={styles.userInfoWrapper}>
+              <Text style={[styles.fontSize18]}>Robben Wadlky</Text>
+              <TouchableHighlight>
+                <View style={styles.userStatus}>
+                  <Ionicon name="add-outline" size={16} color="#ccc" />
+                  <Text style={[styles.fontSize12]}>状态</Text>
+                </View>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </NavItem>
+      </View>
+      <NavItem
+        Icon={props => (
+          <Ionicon name="business-outline" size={16} color={color} {...props} />
+        )}
+        onPress={() => navigate('UserInfo')}>
+        <Text {...titleProps}>课程安排</Text>
+      </NavItem>
+      <NavItem
+        Icon={props => (
+          <Ionicon name="calendar-outline" size={16} color={color} {...props} />
+        )}
+        onPress={() => navigate('UserInfo')}>
+        <Text {...titleProps}>打卡记录</Text>
+      </NavItem>
+      <NavItem
+        Icon={props => (
+          <Ionicon name="settings-outline" size={16} color={color} {...props} />
+        )}
+        onPress={() => navigate('Settings')}
+        noBorder>
+        <Text {...titleProps}>设置</Text>
+      </NavItem>
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#eee',
+  },
+  userInfo: {
+    marginBottom: 20,
+    paddingTop: 25,
+    backgroundColor: '#fff',
+  },
+  userInfoMain: {
+    flexDirection: 'row',
+  },
+  userInfoWrapper: {
+    justifyContent: 'space-between',
+    marginLeft: 20,
+  },
+  userStatus: {
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    borderRadius: 30,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    width: 60,
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 2,
+    marginLeft: 20,
+  },
+  fontSize12: {
+    fontSize: 12,
+  },
+  fontSize18: {
+    fontSize: 18,
   },
 });
