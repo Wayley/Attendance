@@ -11,7 +11,7 @@ export default function Profile({navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
-        <NavItem noBorder>
+        <NavItem noBorder onPress={() => navigate('UserInfo')}>
           <View style={styles.userInfoMain}>
             <Image source={avatar} style={styles.avatar} />
             <View style={styles.userInfoWrapper}>
@@ -30,14 +30,14 @@ export default function Profile({navigation}) {
         Icon={props => (
           <Ionicon name="business-outline" size={16} color={color} {...props} />
         )}
-        onPress={() => navigate('UserInfo')}>
+        onPress={() => navigate('Curriculum')}>
         <Text {...titleProps}>课程安排</Text>
       </NavItem>
       <NavItem
         Icon={props => (
           <Ionicon name="calendar-outline" size={16} color={color} {...props} />
         )}
-        onPress={() => navigate('UserInfo')}>
+        onPress={() => navigate('PunchRecord')}>
         <Text {...titleProps}>打卡记录</Text>
       </NavItem>
       <NavItem

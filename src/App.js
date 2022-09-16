@@ -9,6 +9,8 @@ import Notification from './Pages/Notification';
 import Profile from './Pages/Profile/Index';
 import UserInfo from './Pages/Profile/UserInfo';
 import Settings from './Pages/Profile/Settings';
+import Curriculum from './Pages/Curriculum';
+import PunchRecord from './Pages/PunchRecord';
 
 import './Locales/Calendar';
 
@@ -61,6 +63,10 @@ function RootTabs() {
 }
 
 const Stack = createStackNavigator();
+const screenOptions = {
+  headerTitleStyle: {fontSize: 16},
+  headerTitleAlign: 'center',
+};
 export default function App() {
   return (
     <NavigationContainer>
@@ -70,8 +76,26 @@ export default function App() {
           component={RootTabs}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="UserInfo" component={UserInfo} />
-        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen
+          name="UserInfo"
+          component={UserInfo}
+          options={{title: '个人信息', ...screenOptions}}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={Settings}
+          options={{title: '设置', ...screenOptions}}
+        />
+        <Stack.Screen
+          name="Curriculum"
+          component={Curriculum}
+          options={{title: '课程安排', ...screenOptions}}
+        />
+        <Stack.Screen
+          name="PunchRecord"
+          component={PunchRecord}
+          options={{title: '打卡记录', ...screenOptions}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
