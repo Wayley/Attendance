@@ -15,7 +15,7 @@ export default function Profile({navigation}) {
           <View style={styles.userInfoMain}>
             <Image source={avatar} style={styles.avatar} />
             <View style={styles.userInfoWrapper}>
-              <Text style={[styles.fontSize18]}>Robben Wadlky</Text>
+              <Text style={[styles.fontSize18]}>ROBBEN WADLEY</Text>
               <TouchableHighlight>
                 <View style={styles.userStatus}>
                   <Ionicon name="add-outline" size={16} color="#ccc" />
