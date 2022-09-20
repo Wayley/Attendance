@@ -5,6 +5,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 import avatar from '../../Assets/avatar.jpg';
 const color = '#1F65FF';
 const titleProps = {numberOfLines: 1, ellipsizeMode: 'tail'};
+const Icon = props => <Ionicon size={16} color={color} {...props} />;
 
 export default function Profile({navigation}) {
   const {navigate} = navigation;
@@ -27,23 +28,17 @@ export default function Profile({navigation}) {
         </NavItem>
       </View>
       <NavItem
-        Icon={props => (
-          <Ionicon name="business-outline" size={16} color={color} {...props} />
-        )}
+        Icon={props => <Icon name="business-outline" {...props} />}
         onPress={() => navigate('Curriculum')}>
         <Text {...titleProps}>课程安排</Text>
       </NavItem>
       <NavItem
-        Icon={props => (
-          <Ionicon name="calendar-outline" size={16} color={color} {...props} />
-        )}
+        Icon={props => <Icon name="calendar-outline" {...props} />}
         onPress={() => navigate('PunchRecord')}>
         <Text {...titleProps}>打卡记录</Text>
       </NavItem>
       <NavItem
-        Icon={props => (
-          <Ionicon name="settings-outline" size={16} color={color} {...props} />
-        )}
+        Icon={props => <Icon name="settings-outline" {...props} />}
         onPress={() => navigate('Settings')}
         noBorder>
         <Text {...titleProps}>设置</Text>
@@ -54,7 +49,6 @@ export default function Profile({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#eee',
   },
   userInfo: {
