@@ -70,7 +70,7 @@ const screenOptions = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RootTabs">
+      <Stack.Navigator initialRouteName="PunchRecord">
         <Stack.Screen
           name="RootTabs"
           component={RootTabs}

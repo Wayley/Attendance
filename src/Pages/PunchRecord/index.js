@@ -14,6 +14,7 @@ import {
   CalendarProvider,
 } from 'react-native-calendars';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {parseDate} from '../../Utils';
 
 function AgendaItem({item}) {
   const {title, hour, duration} = item;
@@ -116,7 +117,7 @@ function getMarkedDates(s) {
 export default function Page() {
   return (
     <CalendarProvider
-      date="2022-09-16"
+      date={parseDate(new Date())}
       showTodayButton
       disabledOpacity={0.6}
       theme={{todayButtonTextColor: '#00AAAF'}}>
