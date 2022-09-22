@@ -17,32 +17,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {parseDate} from '../../Utils';
 
 function AgendaItem({item}) {
-  const {title, hour, duration} = item;
-  if (isEmpty(item)) {
-    return (
-      <View style={styles.emptyItem}>
-        <Text style={styles.emptyItemText}>No Events Planned Today</Text>
-      </View>
-    );
-  }
+  const {date, time, notes} = item;
   return (
-    <TouchableOpacity
-      onPress={() => Alert.alert(title)}
-      style={styles.item}
-      testID="item">
-      <View>
-        <Text style={styles.itemHourText}>{hour}</Text>
-        <Text style={styles.itemDurationText}>{duration}</Text>
-      </View>
-      <Text style={styles.itemTitleText}>{title}</Text>
-      <View style={styles.itemButtonContainer}>
-        <Button
-          color={'grey'}
-          title="INFo"
-          onPress={() => Alert.alert('Show me more2')}
-        />
-      </View>
-    </TouchableOpacity>
+    <View>
+      <Text>{date}</Text>
+      <Text>{time}</Text>
+      <Text>{notes}</Text>
+    </View>
   );
 }
 
@@ -75,30 +56,14 @@ const theme = {
 const sections = [
   {
     title: '2022-09-12',
-    data: [{hour: '12am', duration: '1h', title: 'F222irst Yoga'}],
-  },
-  {
-    title: '2022-09-16',
     data: [
-      {hour: '4pm', duration: '1h', title: 'Pilates ABC'},
-      {hour: '5pm', duration: '1h', title: 'Vinyasa Yoga'},
+      {
+        date: '2022-09-22',
+        time: '15:30:00',
+        notes: '2nd Record',
+        updateAt: '2022-09-22 15:41:05',
+      },
     ],
-  },
-  {
-    title: '2022-09-17',
-    data: [
-      {hour: '1pm', duration: '1h', title: 'Ashtanga Yoga'},
-      {hour: '2pm', duration: '1h', title: 'Deep Stretches'},
-      {hour: '3pm', duration: '1h', title: 'Private Yoga'},
-    ],
-  },
-  {
-    title: '2022-09-18',
-    data: [{hour: '12am', duration: '1h', title: 'Ashtanga Yoga'}],
-  },
-  {
-    title: '2022-09-13',
-    data: [],
   },
 ];
 
