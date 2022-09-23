@@ -55,11 +55,22 @@ const theme = {
 };
 const sections = [
   {
-    title: '2022-09-12',
+    title: '2022-09-23',
     data: [
       {
-        date: '2022-09-22',
-        time: '15:30:00',
+        date: '2022-09-23',
+        time: '11:30:00',
+        notes: '2nd Record',
+        updateAt: '2022-09-22 15:41:05',
+      },
+    ],
+  },
+  {
+    title: '2022-09-20',
+    data: [
+      {
+        date: '2022-09-23',
+        time: '11:30:00',
         notes: '2nd Record',
         updateAt: '2022-09-22 15:41:05',
       },
@@ -87,6 +98,7 @@ export default function Page() {
       disabledOpacity={0.6}
       theme={{todayButtonTextColor: '#00AAAF'}}>
       <ExpandableCalendar
+        initialPosition="open"
         testID="expandableCalendar"
         theme={theme}
         firstDay={1}
