@@ -72,7 +72,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="RootTabs"
+        initialRouteName="PunchRecord"
         screenOptions={{
           headerBackImage: ({tintColor}) => (
             <Icon name="chevron-back-outline" size={22} color={tintColor} />

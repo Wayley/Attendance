@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Alert,
-  View,
-  Text,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import isEmpty from 'lodash/isEmpty';
 import {
   ExpandableCalendar,
@@ -53,26 +46,33 @@ const theme = {
   textSectionTitleColor: 'black',
   todayTextColor: '#af0078',
 };
+
 const sections = [
   {
-    title: '2022-09-23',
+    title: '2022-10-08',
     data: [
       {
-        date: '2022-09-23',
-        time: '11:30:00',
-        notes: '2nd Record',
-        updateAt: '2022-09-22 15:41:05',
+        date: '2022-10-08',
+        time: '10:00:00',
+        notes: 'Lorem',
+        updateAt: '2022-10-08 10:31:05',
+      },
+      {
+        date: '2022-10-08',
+        time: '11:00:00',
+        notes: 'Lorem Lorem',
+        updateAt: '2022-10-08 11:34:35',
       },
     ],
   },
   {
-    title: '2022-09-20',
+    title: '2022-10-09',
     data: [
       {
-        date: '2022-09-23',
-        time: '11:30:00',
-        notes: '2nd Record',
-        updateAt: '2022-09-22 15:41:05',
+        date: '2022-10-09',
+        time: '11:10:00',
+        notes: 'Edawdcx dofig',
+        updateAt: '2022-10-09 15:41:05',
       },
     ],
   },
