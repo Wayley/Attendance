@@ -2,6 +2,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import Home from './Pages/Home';
 import Vlog from './Pages/Vlog';
@@ -70,7 +71,13 @@ const screenOptions = {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="PunchRecord">
+      <Stack.Navigator
+        initialRouteName="RootTabs"
+        screenOptions={{
+          headerBackImage: ({tintColor}) => (
+            <Icon name="chevron-back-outline" size={22} color={tintColor} />
+          ),
+        }}>
         <Stack.Screen
           name="RootTabs"
           component={RootTabs}
