@@ -1,5 +1,12 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  Alert,
+  View,
+  Text,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import isEmpty from 'lodash/isEmpty';
 import {
   ExpandableCalendar,
@@ -9,14 +16,34 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import {parseDate} from '../../Utils';
 
+import sections from '../../mocks/punchRecord';
+
 function AgendaItem({item}) {
-  const {date, time, notes} = item;
+  if (isEmpty(item)) {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.emptyItemText}>No Events Planned Today</Text>
+      </View>
+    );
+  }
+  const {id, time, notes} = item;
+
+  const GoDetail = () => {
+    // TODO:
+    Alert.alert('', `id: ${id}`);
+  };
   return (
-    <View>
-      <Text>{date}</Text>
-      <Text>{time}</Text>
-      <Text>{notes}</Text>
-    </View>
+    <TouchableOpacity
+      onPress={() => Alert.alert(time, notes)}
+      style={styles.item}>
+      <View style={styles.itemMain}>
+        <Text style={styles.itemTitle}>{time}</Text>
+        <Text style={styles.itemNotes} numberOfLines={1}>
+          {notes}
+        </Text>
+      </View>
+      <Button title="Edit Record" onPress={GoDetail} />
+    </TouchableOpacity>
   );
 }
 
@@ -46,37 +73,6 @@ const theme = {
   textSectionTitleColor: 'black',
   todayTextColor: '#af0078',
 };
-
-const sections = [
-  {
-    title: '2022-10-08',
-    data: [
-      {
-        date: '2022-10-08',
-        time: '10:00:00',
-        notes: 'Lorem',
-        updateAt: '2022-10-08 10:31:05',
-      },
-      {
-        date: '2022-10-08',
-        time: '11:00:00',
-        notes: 'Lorem Lorem',
-        updateAt: '2022-10-08 11:34:35',
-      },
-    ],
-  },
-  {
-    title: '2022-10-09',
-    data: [
-      {
-        date: '2022-10-09',
-        time: '11:10:00',
-        notes: 'Edawdcx dofig',
-        updateAt: '2022-10-09 15:41:05',
-      },
-    ],
-  },
-];
 
 function getMarkedDates(s) {
   const marked = {};
@@ -117,7 +113,7 @@ export default function Page() {
       />
       <AgendaList
         sections={sections}
-        renderItem={({item}) => <AgendaItem item={item} />}
+        renderItem={({item, index}) => <AgendaItem item={item} key={index} />}
         sectionStyle={styles.section}
       />
     </CalendarProvider>
@@ -125,50 +121,30 @@ export default function Page() {
 }
 
 const styles = StyleSheet.create({
-  calendar: {
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
-  section: {
-    backgroundColor: '#f2f7f7',
-    color: 'grey',
-    textTransform: 'capitalize',
-  },
+  section: {color: 'grey'},
   item: {
-    padding: 20,
-    backgroundColor: 'white',
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
+    borderBottomColor: '#dedede',
     flexDirection: 'row',
+    alignItems: 'center',
   },
-  itemHourText: {
-    color: 'black',
+  itemMain: {flex: 1},
+  itemTitle: {
+    color: '#000',
+    fontWeight: '400',
+    fontSize: 16,
   },
-  itemDurationText: {
-    color: 'grey',
-    fontSize: 12,
+  itemNotes: {
+    color: '#777',
+    fontSize: 14,
     marginTop: 4,
     marginLeft: 4,
   },
-  itemTitleText: {
-    color: 'black',
-    marginLeft: 16,
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  itemButtonContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-  },
-  emptyItem: {
-    paddingLeft: 20,
-    height: 52,
-    justifyContent: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-  },
   emptyItemText: {
-    color: 'lightgrey',
+    color: '#aeaeae',
     fontSize: 14,
   },
 });
