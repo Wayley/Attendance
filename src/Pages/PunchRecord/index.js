@@ -48,16 +48,16 @@ function AgendaItem({item}) {
 }
 
 const theme = {
-  arrowColor: 'black',
-  arrowStyle: {padding: 0},
-  dayTextColor: '#00AAAF',
+  // arrowColor: 'black',
+  // arrowStyle: {padding: 0},
+  // dayTextColor: '#00AAAF',
   disabledDotColor: 'grey',
   dotColor: '#00AAAF',
   dotStyle: {marginTop: -2},
   expandableKnobColor: '#00AAAF',
   monthTextColor: 'black',
   selectedDayBackgroundColor: '#00AAAF',
-  selectedDayTextColor: 'white',
+  selectedDayTextColor: 'red',
   selectedDotColor: 'white',
   textDayFontFamily: 'HelveticaNeue',
   textDayFontSize: 18,
