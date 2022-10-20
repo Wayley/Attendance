@@ -73,13 +73,16 @@ const theme = {
   textSectionTitleColor: 'black',
   todayTextColor: '#af0078',
 };
-
+const customStyles = {
+  container: {backgroundColor: '#1F65FF'},
+  text: {color: '#fff'},
+};
 function getMarkedDates(s) {
   const marked = {};
   s.forEach(item => {
     // NOTE: only mark dates with data
     if (item.data && item.data.length > 0 && !isEmpty(item.data[0])) {
-      marked[item.title] = {marked: true};
+      marked[item.title] = {marked: true, customStyles};
     } else {
       marked[item.title] = {disabled: true};
     }
@@ -95,9 +98,7 @@ export default function Page() {
       theme={{todayButtonTextColor: '#00AAAF'}}>
       <ExpandableCalendar
         initialPosition="open"
-        testID="expandableCalendar"
-        theme={theme}
-        firstDay={1}
+        markingType="custom"
         markedDates={getMarkedDates(sections)}
         renderArrow={direction => (
           <Icon
