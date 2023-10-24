@@ -2839,7 +2839,7 @@ pify@^2.2.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
   integrity sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==
 
-pinia@^2.1.6:
+pinia@^2.1.6, pinia@^2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
   integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
@@ -3648,7 +3648,7 @@ vue-tsc@^1.8.11:
     "@vue/typescript" "1.8.19"
     semver "^7.5.4"
 
-vue@^3.3.4:
+vue@^3.2.0, vue@^3.3.4:
   version "3.3.6"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.3.6.tgz#bc1b129a73705db16da90aa1edde539d7401ca9d"
   integrity sha512-jJIDETeWJnoY+gfn4ZtMPMS5KtbP4ax+CT4dcQFhTnWEk8xMupFyQ0JxL28nvT/M4+p4a0ptxaV2WY0LiIxvRg==
@@ -3732,11 +3732,13 @@ wing-viewport@^0.0.2:
   resolved "https://registry.yarnpkg.com/wing-viewport/-/wing-viewport-0.0.2.tgz#5c787b32f63afd82f8a32aeea76d3db19b493232"
   integrity sha512-qvUKrB6WLqcKGP60O/hTWlQPXr9Jhmual/BIHOtaKfdrHtKt3wqApkzkVi2JgoKkdKdaTEIqdWBhV5ER1nEttQ==
 
-wing-vue-viewport@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/wing-vue-viewport/-/wing-vue-viewport-0.0.2.tgz#436c6443eafef054ca62d6706d00b7959388d078"
-  integrity sha512-2HJDCDNY1KYRvX/Q/07ILljugQYkFiiZDapWaeh4SSI6NubgKxjKX+TXfdeNcZ5W8OGUxVpoich56ZYHklEUgg==
+wing-vue-viewport@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/wing-vue-viewport/-/wing-vue-viewport-0.1.0.tgz#419ca940d7b5a02bef60774b4231163ad3fc2f3a"
+  integrity sha512-q4QUpGgYRdUTkjKtJ93mWepa2P/gLEBuv+Bx02Sg8M6SytvnRhHixlnSie5qg4smwSeRsaqY9kba+UnU8uUKrg==
   dependencies:
+    pinia "^2.1.7"
+    vue "^3.2.0"
     wing-viewport "^0.0.2"
 
 wrap-ansi@^6.2.0:

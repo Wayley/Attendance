@@ -19,7 +19,7 @@
     "vant": "^4.7.2",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4",
-    "wing-vue-viewport": "^0.0.2"
+    "wing-vue-viewport": "^0.1.0"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.3.3",
