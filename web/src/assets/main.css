@@ -1,9 +1,44 @@
 @import './base.css';
 
-#app {
-  max-width: 1280px;
+/* *********************************** Common *********************************** */
+/* #app {
+  
+} */
+.section {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-  background-color: #ddd;
+}
+.scrollbar::-webkit-scrollbar {
+  width: 10px;
+  background-color: #fff;
+  height: 10px;
+}
+
+.scrollbar:hover ::-webkit-scrollbar-track-piece {
+  background-color: #fff;
+  border-radius: 6px;
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb:hover {
+  background-color: #c0cecc;
+}
+
+.scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: #c0cedc;
+  border-radius: 6px;
+  outline: 1px solid #fff;
+  outline-offset: -2px;
+  border: 1px solid #fff;
+}
+
+/* *********************************** Common *********************************** */
+:root:root {
+  --van-primary-color: var(--wing-c-primary-color);
+  --van-back-top-background: var(--wing-c-primary-color);
+}
+.van-switch {
+  vertical-align: middle;
+}
+.van-icon {
+  vertical-align: top;
 }

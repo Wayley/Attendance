@@ -10,6 +10,13 @@ declare module 'vue' {
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanBackTop: typeof import('vant/es')['BackTop']
+    VanButton: typeof import('vant/es')['Button']
+    VanCol: typeof import('vant/es')['Col']
+    VanConfigProvider: typeof import('vant/es')['ConfigProvider']
+    VanIcon: typeof import('vant/es')['Icon']
+    VanRow: typeof import('vant/es')['Row']
+    VanSwitch: typeof import('vant/es')['Switch']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
   }
