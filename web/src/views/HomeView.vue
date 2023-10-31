@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 const minDate: Date = new Date(2020, 1, 1)
+const currentDate: Date = new Date()
+
 const showCalendar: boolean = ref(false)
 const showTimePicker: boolean = ref(false)
-let tempDateTime: string = ref('')
+const tempDateTime: string = ref('')
+const remarkCalendar = ref(null)
+
 let dates: date[] = ref([
   new Date('2023/10/23 11:00:00'),
   new Date('2023/10/23 15:30:00'),
@@ -23,49 +27,61 @@ const onTimePickerConfirm = ({ selectedValues }) => {
   const preDates = [...dates.value, new Date(tempDateTime.value)]
   dates.value = preDates
 }
-const formatter = (day: Day) => {
-  if (
-    day.type.indexOf('selected') > -1 ||
-    day.type.indexOf('start') > -1 ||
-    day.type.indexOf('end') > -1
-  ) {
-    console.log(1111111, day.type)
-  } else {
-    day.type = 'disabled' // middle
-  }
-  return day
+function isSelected(day: Day) {
+  let d = day.date.getDate()
+  let m = day.date.getMonth() + 1
+  return m == 10 && [24, 27, 23].indexOf(d) > -1
 }
-function select(v) {
-  console.log('select', v)
-}
-function unselect(v) {
-  console.log('unselect', v)
-  return false
-}
+onMounted(() => {
+  // 默认显示当前
+  remarkCalendar.value.scrollToDate(new Date())
+})
+// scrollToDate
 </script>
 <template>
   <div class="home-page">
     <VanCalendar
+      ref="remarkCalendar"
+      class="remark-calendar"
       title="日历"
       type="multiple"
       style="height: 70vh"
       :poppable="false"
       :show-confirm="false"
-      :formatter="formatter"
       :min-date="minDate"
-      :max-date="new Date()"
-      :default-date="dates"
-      @select="select"
-      @unselect="unselect"
-    />
-    <div class="punching-btn">
-      <VanButton type="primary" block @click="showCalendar = true">打卡</VanButton>
-    </div>
+      :max-date="currentDate"
+      :default-date="null"
+      :formatter="(day) => ({ ...day, type: 'disabled' })"
+      :unselect="() => console.log('unselect')"
+      :select="() => console.log('select')"
+    >
+      <template #bottom-info="day">
+        <template v-if="isSelected(day)">
+          <div v-if="day.date.getDate() == 27">
+            <div class="dot dot-green" />
+            <div class="dot dot-red" />
+            <div class="dot dot-green" />
+          </div>
+
+          <div v-if="day.date.getDate() == 24">
+            <div class="dot dot-red" />
+            <div class="dot dot-green" />
+          </div>
+
+          <div v-if="day.date.getDate() == 23">
+            <div class="dot dot-red" />
+          </div>
+        </template>
+      </template>
+    </VanCalendar>
+    <VanButton class="punching-btn" type="primary" block @click="showCalendar = true">
+      开始
+    </VanButton>
     <VanCalendar
       v-model:show="showCalendar"
-      @confirm="onCalendarConfirm"
       :min-date="minDate"
-      :max-date="new Date()"
+      :max-date="currentDate"
+      @confirm="onCalendarConfirm"
     />
     <VanPopup v-model:show="showTimePicker" round position="bottom" style="height: 50%">
       <VanTimePicker
@@ -81,5 +97,33 @@ function unselect(v) {
   width: 70%;
   margin: 0 auto;
   margin-top: 50px;
+}
+
+.page {
+  width: 50px;
+  height: 80px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.dot + .dot {
+  margin-top: 4px;
+}
+.dot-green {
+  background-color: green;
+}
+
+.dot-red {
+  background-color: red;
 }
 </style>

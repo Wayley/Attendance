@@ -30,7 +30,13 @@
   outline-offset: -2px;
   border: 1px solid #fff;
 }
-
+.remark-calendar .van-calendar__day {
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.remark-calendar .van-calendar__bottom-info {
+  position: static;
+}
 /* *********************************** Common *********************************** */
 :root:root {
   --van-primary-color: var(--wing-c-primary-color);
