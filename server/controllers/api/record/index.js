@@ -2,13 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
-const MODULE_NAME = 'record';
+
 let records = [
-  { id: 151, createAt: '2023/10/1 12:00:00', dateTime: '2023/9/21 10:00:00', type: '感统' },
-  { id: 152, createAt: '2023/10/1 12:00:05', dateTime: '2023/9/21 15:30:00', type: '全脑' },
-  { id: 153, createAt: '2023/10/1 12:00:13', dateTime: '2023/9/22 11:30:00', type: '感统' },
-  { id: 154, createAt: '2023/10/1 12:00:21', dateTime: '2023/9/26 11:30:00', type: '感统' },
-  { id: 155, createAt: '2023/10/1 12:00:21', dateTime: '2023/9/29 16:30:00', type: '全脑' },
+  { id: 151, createAt: '2023//11/1 12:00:00', dateTime: '2023/10/21 10:00:00', type: '感统' },
+  { id: 152, createAt: '2023//11/1 12:00:05', dateTime: '2023/10/21 15:30:00', type: '全脑' },
+  { id: 153, createAt: '2023//11/1 12:00:13', dateTime: '2023/10/22 11:30:00', type: '感统' },
+  { id: 154, createAt: '2023//11/1 12:00:21', dateTime: '2023/10/26 11:30:00', type: '感统' },
+  { id: 155, createAt: '2023//11/1 12:00:21', dateTime: '2023/10/29 16:30:00', type: '全脑' },
 ];
 
 function getList() {
