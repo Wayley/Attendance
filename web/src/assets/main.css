@@ -37,7 +37,8 @@
 .remark-calendar .van-calendar__bottom-info {
   position: static;
 }
-/* *********************************** Common *********************************** */
+
+/* *********************************** Overwrite *********************************** */
 :root:root {
   --van-primary-color: var(--wing-c-primary-color);
   --van-back-top-background: var(--wing-c-primary-color);

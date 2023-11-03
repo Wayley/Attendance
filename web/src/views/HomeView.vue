@@ -15,6 +15,11 @@ let dates: date[] = ref([
   new Date('2023/10/27 15:30:00')
 ])
 
+onMounted(() => {
+  // 默认显示当前
+  remarkCalendar.value.scrollToDate(new Date())
+})
+
 const onCalendarConfirm = (date: Date) => {
   showCalendar.value = false
   showTimePicker.value = true
@@ -32,35 +37,27 @@ function isSelected(day: Day) {
   let m = day.date.getMonth() + 1
   return m == 10 && [24, 27, 23].indexOf(d) > -1
 }
-onMounted(() => {
-  // 默认显示当前
-  remarkCalendar.value.scrollToDate(new Date())
-})
-// scrollToDate
 </script>
 <template>
   <div class="home-page">
     <VanCalendar
+      class="remark-calendar record-calender"
       ref="remarkCalendar"
-      class="remark-calendar"
       title="日历"
       type="multiple"
-      style="height: 70vh"
       :poppable="false"
       :show-confirm="false"
       :min-date="minDate"
       :max-date="currentDate"
       :default-date="null"
       :formatter="(day) => ({ ...day, type: 'disabled' })"
-      :unselect="() => console.log('unselect')"
-      :select="() => console.log('select')"
     >
       <template #bottom-info="day">
         <template v-if="isSelected(day)">
-          <div v-if="day.date.getDate() == 27">
-            <div class="dot dot-green" />
-            <div class="dot dot-red" />
-            <div class="dot dot-green" />
+          <div v-if="day.date.getDate() == 23">
+            <div class="dot dot-green">感统</div>
+            <div class="dot dot-red text-through">全脑</div>
+            <div class="dot dot-green">感统</div>
           </div>
 
           <div v-if="day.date.getDate() == 24">
@@ -68,7 +65,7 @@ onMounted(() => {
             <div class="dot dot-green" />
           </div>
 
-          <div v-if="day.date.getDate() == 23">
+          <div v-if="day.date.getDate() == 27">
             <div class="dot dot-red" />
           </div>
         </template>
@@ -78,12 +75,12 @@ onMounted(() => {
       开始
     </VanButton>
     <VanCalendar
-      v-model:show="showCalendar"
+      :show="showCalendar"
       :min-date="minDate"
       :max-date="currentDate"
       @confirm="onCalendarConfirm"
     />
-    <VanPopup v-model:show="showTimePicker" round position="bottom" style="height: 50%">
+    <VanPopup :show="showTimePicker" round position="bottom" style="height: 50%">
       <VanTimePicker
         title="选择时间"
         :columns-type="['hour', 'minute', 'second']"
@@ -99,31 +96,33 @@ onMounted(() => {
   margin-top: 50px;
 }
 
-.page {
-  width: 50px;
-  height: 80px;
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #ccc;
-
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+.record-calender {
+  height: 70vh;
 }
 
 .dot {
+  color: #000;
+  font-size: 12px;
+}
+
+.dot::before {
+  content: '';
+  display: inline-block;
   width: 7px;
   height: 7px;
   border-radius: 50%;
+  margin-right: 5px;
 }
-.dot + .dot {
-  margin-top: 4px;
-}
-.dot-green {
+
+.dot-green::before {
   background-color: green;
 }
 
-.dot-red {
+.dot-red::before {
   background-color: red;
+}
+
+.text-through {
+  text-decoration: line-through;
 }
 </style>
