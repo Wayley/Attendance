@@ -3,12 +3,26 @@
 const express = require('express');
 const router = express.Router();
 
+const today = new Date();
+
+let yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
+
+let dayBeforeYesterday = new Date();
+dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
+
+const todayStr = today.toLocaleString();
+const todayDateStr = today.toLocaleDateString();
+const yesterdayDateStr = yesterday.toLocaleDateString();
+const dayBeforeYesterdayDateStr = dayBeforeYesterday.toLocaleDateString();
+
 let records = [
-  { id: 151, createAt: '2023//11/1 12:00:00', dateTime: '2023/10/21 10:00:00', type: '感统' },
-  { id: 152, createAt: '2023//11/1 12:00:05', dateTime: '2023/10/21 15:30:00', type: '全脑' },
-  { id: 153, createAt: '2023//11/1 12:00:13', dateTime: '2023/10/22 11:30:00', type: '感统' },
-  { id: 154, createAt: '2023//11/1 12:00:21', dateTime: '2023/10/26 11:30:00', type: '感统' },
-  { id: 155, createAt: '2023//11/1 12:00:21', dateTime: '2023/10/29 16:30:00', type: '全脑' },
+  { id: 151, createAt: `${todayStr}`, dateTime: `${dayBeforeYesterdayDateStr} 10:00:00`, type: 10, status: 1 },
+  { id: 152, createAt: `${todayStr}`, dateTime: `${dayBeforeYesterdayDateStr} 15:30:00`, type: 20, status: 0 },
+  { id: 153, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 8:30:00`, type: 10, status: 1 },
+  { id: 154, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 10:00:00`, type: 20, status: 1 },
+  { id: 155, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 17:30:00`, type: 10, status: 0 },
+  { id: 156, createAt: `${todayStr}`, dateTime: `${todayDateStr} 8:30:00`, type: 20, status: 1 },
 ];
 
 function getList() {
@@ -42,7 +56,7 @@ function deleteData(req) {
 // Get list
 router.get('/', function (req, res) {
   const data = getList();
-  res.send(data);
+  setTimeout(() => res.send(data), 2500);
 });
 
 // Create one
