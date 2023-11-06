@@ -22,6 +22,17 @@ const router = createRouter({
       path: '/mine',
       name: 'mine',
       component: () => import('../views/MineView.vue')
+    },
+    {
+      path: '/record',
+      name: 'record',
+      children: [
+        {
+          path: '/add',
+          name: 'record.add',
+          component: () => import('../views/Record/RecordAdd.vue')
+        }
+      ]
     }
   ]
 })

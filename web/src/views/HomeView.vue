@@ -66,7 +66,12 @@ function format(data) {
         </template>
       </template>
     </VanCalendar>
-    <VanButton class="punching-btn" type="primary" block @click="$router.push('/course')">
+    <VanButton
+      class="punching-btn"
+      type="primary"
+      block
+      @click="$router.push({ name: 'record.add' })"
+    >
       打卡
     </VanButton>
   </div>
