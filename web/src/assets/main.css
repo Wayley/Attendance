@@ -1,13 +1,10 @@
 @import './base.css';
 
 /* *********************************** Common *********************************** */
-/* #app {
-  
-} */
-.section {
-  max-width: 1200px;
-  margin: 0 auto;
+#app {
+  max-width: 1024px;
 }
+
 .scrollbar::-webkit-scrollbar {
   width: 10px;
   background-color: #fff;
@@ -30,22 +27,35 @@
   outline-offset: -2px;
   border: 1px solid #fff;
 }
+
 .remark-calendar .van-calendar__day {
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .remark-calendar .van-calendar__bottom-info {
   position: static;
 }
 
+.wrapper-with-nav {
+  padding-bottom: 50px;
+}
+
+.text-through {
+  text-decoration: line-through;
+}
+
 /* *********************************** Overwrite *********************************** */
+
 :root:root {
   --van-primary-color: var(--wing-c-primary-color);
   --van-back-top-background: var(--wing-c-primary-color);
 }
+
 .van-switch {
   vertical-align: middle;
 }
+
 .van-icon {
   vertical-align: top;
 }

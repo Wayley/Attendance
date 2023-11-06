@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useRecordFetch } from '../services/record'
+import NavBar from '@/views/components/NavBar.vue'
+import { useRecordFetch } from '@/services/record'
 
 const minDate: Date = new Date(2023, 1, 1)
 const currentDate: Date = new Date()
@@ -29,8 +30,9 @@ function format(data) {
   return result
 }
 </script>
+
 <template>
-  <div class="home-page">
+  <div class="wrapper-with-nav">
     <VanCalendar
       class="remark-calendar record-calender"
       ref="remarkCalendar"
@@ -75,14 +77,9 @@ function format(data) {
       打卡
     </VanButton>
   </div>
+  <NavBar />
 </template>
 <style scoped>
-.punching-btn {
-  width: 70%;
-  margin: 0 auto;
-  margin-top: 50px;
-}
-
 .record-calender {
   height: 70vh;
 }
@@ -109,7 +106,9 @@ function format(data) {
   background-color: yellowgreen;
 }
 
-.text-through {
-  text-decoration: line-through;
+.punching-btn {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 </style>

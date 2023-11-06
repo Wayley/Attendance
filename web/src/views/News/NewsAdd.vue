@@ -1,3 +1,3 @@
 <template>
-  <h1>Mine</h1>
+  <h1>News Add</h1>
 </template>

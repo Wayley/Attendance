@@ -1,3 +1,3 @@
 <template>
-  <h1>Course</h1>
+  <h1>Course Add</h1>
 </template>
