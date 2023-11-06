@@ -5,8 +5,6 @@ import { useRecordFetch } from '@/services/record'
 
 const { data } = useRecordFetch('/').json()
 
-console.log(data)
-console.log('record page', data, data.value)
 </script>
 <template>
   <ul>

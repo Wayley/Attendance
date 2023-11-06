@@ -1,41 +1,32 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
-const minDate: Date = new Date(2020, 1, 1)
+import { ref, onMounted, computed } from 'vue'
+import { useRecordFetch } from '../services/record'
+
+const minDate: Date = new Date(2023, 1, 1)
 const currentDate: Date = new Date()
+const remarkCalendar: CalendarInstance = ref(null)
 
-const showCalendar: boolean = ref(false)
-const showTimePicker: boolean = ref(false)
-const tempDateTime: string = ref('')
-const remarkCalendar = ref(null)
-
-let dates: date[] = ref([
-  new Date('2023/10/23 11:00:00'),
-  new Date('2023/10/23 15:30:00'),
-  new Date('2023/10/24 15:30:00'),
-  new Date('2023/10/27 15:30:00')
-])
+const { data } = useRecordFetch('/').json()
+const dataTree = computed(() => format(data.value))
 
 onMounted(() => {
-  // 默认显示当前
-  remarkCalendar.value.scrollToDate(new Date())
+  remarkCalendar?.value.scrollToDate(new Date()) // 默认显示当前
 })
 
-const onCalendarConfirm = (date: Date) => {
-  showCalendar.value = false
-  showTimePicker.value = true
-  tempDateTime.value = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
-}
-const onTimePickerConfirm = ({ selectedValues }) => {
-  showTimePicker.value = false
-  tempDateTime.value += ` ${selectedValues.join(':')}`
-
-  const preDates = [...dates.value, new Date(tempDateTime.value)]
-  dates.value = preDates
-}
-function isSelected(day: Day) {
-  let d = day.date.getDate()
-  let m = day.date.getMonth() + 1
-  return m == 10 && [24, 27, 23].indexOf(d) > -1
+function format(data) {
+  let result = {}
+  if (data) {
+    data.forEach((item) => {
+      const { dateTime } = item
+      const [date] = dateTime.split(' ')
+      if (Object.hasOwn(result, date)) {
+        result[date].push(item)
+      } else {
+        result[date] = [item]
+      }
+    })
+  }
+  return result
 }
 </script>
 <template>
@@ -52,41 +43,32 @@ function isSelected(day: Day) {
       :default-date="null"
       :formatter="(day) => ({ ...day, type: 'disabled' })"
     >
-      <template #bottom-info="day">
-        <template v-if="isSelected(day)">
-          <div v-if="day.date.getDate() == 23">
-            <div class="dot dot-green">感统</div>
-            <div class="dot dot-red text-through">全脑</div>
-            <div class="dot dot-green">感统</div>
-          </div>
-
-          <div v-if="day.date.getDate() == 24">
-            <div class="dot dot-red" />
-            <div class="dot dot-green" />
-          </div>
-
-          <div v-if="day.date.getDate() == 27">
-            <div class="dot dot-red" />
-          </div>
+      <template #bottom-info="{ date }">
+        <template v-if="Object.hasOwn(dataTree, date.toLocaleDateString())">
+          <template v-for="(list, key) in dataTree">
+            <div v-if="date.toLocaleDateString() == key" :key="key">
+              <div
+                v-for="({ type, status }, key) in list"
+                :key="key"
+                :class="[
+                  'dot',
+                  {
+                    'dot-green': type == 10,
+                    'dot-yellowgreen': type == 20,
+                    'text-through': status == 1
+                  }
+                ]"
+              >
+                {{ type == 10 ? '感统' : '全脑' }}
+              </div>
+            </div>
+          </template>
         </template>
       </template>
     </VanCalendar>
-    <VanButton class="punching-btn" type="primary" block @click="showCalendar = true">
-      开始
+    <VanButton class="punching-btn" type="primary" block @click="$router.push('/course')">
+      打卡
     </VanButton>
-    <VanCalendar
-      :show="showCalendar"
-      :min-date="minDate"
-      :max-date="currentDate"
-      @confirm="onCalendarConfirm"
-    />
-    <VanPopup :show="showTimePicker" round position="bottom" style="height: 50%">
-      <VanTimePicker
-        title="选择时间"
-        :columns-type="['hour', 'minute', 'second']"
-        @confirm="onTimePickerConfirm"
-      />
-    </VanPopup>
   </div>
 </template>
 <style scoped>
@@ -118,8 +100,8 @@ function isSelected(day: Day) {
   background-color: green;
 }
 
-.dot-red::before {
-  background-color: red;
+.dot-yellowgreen::before {
+  background-color: yellowgreen;
 }
 
 .text-through {
