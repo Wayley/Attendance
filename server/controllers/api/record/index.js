@@ -30,7 +30,9 @@ function getList() {
 }
 function create(req) {
   let { id } = records[records.length - 1];
-  const record = { ...req.body, id: id + 1, createAt: new Date().toLocaleString() };
+  const { date, time, type } = req.body;
+  const createAt = new Date().toLocaleString();
+  const record = { dateTime: `${date} ${time}`, type, id: id + 1, createAt, status: 0 };
   records.push(record);
   return record;
 }
