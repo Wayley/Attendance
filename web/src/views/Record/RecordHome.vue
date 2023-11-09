@@ -2,8 +2,8 @@
 import { ref, onMounted, computed } from 'vue'
 import NavBar from '@/views/components/NavBar.vue'
 import { useRecordFetch } from '@/services/record'
+import { minDate } from '@/config'
 
-const minDate: Date = new Date(2023, 1, 1)
 const currentDate: Date = new Date()
 const remarkCalendar: CalendarInstance = ref(null)
 
@@ -32,52 +32,54 @@ function format(data) {
 </script>
 
 <template>
-  <div class="wrapper-with-nav">
-    <VanCalendar
-      class="remark-calendar record-calender"
-      ref="remarkCalendar"
-      title="日历"
-      type="multiple"
-      :poppable="false"
-      :show-confirm="false"
-      :min-date="minDate"
-      :max-date="currentDate"
-      :default-date="null"
-      :formatter="(day) => ({ ...day, type: 'disabled' })"
-    >
-      <template #bottom-info="{ date }">
-        <template v-if="Object.hasOwn(dataTree, date.toLocaleDateString())">
-          <template v-for="(list, key) in dataTree">
-            <div v-if="date.toLocaleDateString() == key" :key="key">
-              <div
-                v-for="({ type, status }, key) in list"
-                :key="key"
-                :class="[
-                  'dot',
-                  {
-                    'dot-green': type == 10,
-                    'dot-yellowgreen': type == 20,
-                    'text-through': status == 1
-                  }
-                ]"
-              >
-                {{ type == 10 ? '感统' : '全脑' }}
+  <div>
+    <div class="wrapper-with-nav">
+      <VanCalendar
+        class="remark-calendar record-calender"
+        ref="remarkCalendar"
+        title="日历"
+        type="multiple"
+        :poppable="false"
+        :show-confirm="false"
+        :min-date="minDate"
+        :max-date="currentDate"
+        :default-date="null"
+        :formatter="(day) => ({ ...day, type: 'disabled' })"
+      >
+        <template #bottom-info="{ date }">
+          <template v-if="Object.hasOwn(dataTree, date.toLocaleDateString())">
+            <template v-for="(list, key) in dataTree">
+              <div v-if="date.toLocaleDateString() == key" :key="key">
+                <div
+                  v-for="({ type, status }, key) in list"
+                  :key="key"
+                  :class="[
+                    'dot',
+                    {
+                      'dot-green': type == 10,
+                      'dot-yellowgreen': type == 20,
+                      'text-through': status == 1
+                    }
+                  ]"
+                >
+                  {{ type == 10 ? '感统' : '全脑' }}
+                </div>
               </div>
-            </div>
+            </template>
           </template>
         </template>
-      </template>
-    </VanCalendar>
-    <VanButton
-      class="punching-btn"
-      type="primary"
-      block
-      @click="$router.push({ name: 'record.add' })"
-    >
-      打卡
-    </VanButton>
+      </VanCalendar>
+      <VanButton
+        class="punching-btn"
+        type="primary"
+        block
+        @click="$router.push({ name: 'record.add' })"
+      >
+        打卡
+      </VanButton>
+    </div>
+    <NavBar />
   </div>
-  <NavBar />
 </template>
 <style scoped>
 .record-calender {

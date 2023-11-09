@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useRecordFetch } from '@/services/record'
+import { minDate, getNow } from '@/config'
 
 const router = useRouter()
 /* **************************** Type **************************** */
@@ -13,16 +15,23 @@ const recordTypes = [
 ]
 
 /* **************************** Date **************************** */
-const date = ref('')
+const { year, month, day, hours, minutes, seconds } = getNow()
+const dates = ref([year, month, day])
+const date = computed(() => dates.value.join('/'))
 const showDatePicker = ref(false)
 
 /* **************************** Time **************************** */
-const time = ref('')
+const times = ref([hours, minutes, seconds])
+const time = computed(() => times.value.join(':'))
 const showTimePicker = ref(false)
 
 const onSubmit = (values) => {
   console.log('submit', values, { ...values, type: type.value[0] })
-  router.back()
+
+  // const { data } = useRecordFetch('/')
+  //   .post({ ...values, type: type.value[0] })
+  //   .json()
+  // if (data) router.back()
 }
 </script>
 <template>
@@ -39,38 +48,25 @@ const onSubmit = (values) => {
           placeholder="点击选择类型"
           @click="showTypePicker = true"
         />
-        <van-popup :show="showTypePicker" position="bottom">
-          <van-picker
-            v-model="type"
-            :columns="recordTypes"
-            @confirm="
-              ({ selectedValues }) => {
-                type = selectedValues
-                showTypePicker = false
-              }
-            "
-            @cancel="showTypePicker = false"
-          />
+        <van-popup :show="showTypePicker" position="bottom" @click-overlay="showTypePicker = false">
+          <van-picker v-model="type" :columns="recordTypes" :show-toolbar="false" />
         </van-popup>
 
         <van-field
-          v-model="date"
           name="date"
+          v-model="date"
           is-link
           readonly
           label="日期"
           placeholder="点击选择日期"
           @click="showDatePicker = true"
         />
-        <van-popup :show="showDatePicker" position="bottom">
+        <van-popup :show="showDatePicker" position="bottom" @click-overlay="showDatePicker = false">
           <van-date-picker
-            @confirm="
-              ({ selectedValues }) => {
-                date = selectedValues.join('/')
-                showDatePicker = false
-              }
-            "
-            @cancel="showDatePicker = false"
+            v-model="dates"
+            :min-date="minDate"
+            :max-date="new Date()"
+            :show-toolbar="false"
           />
         </van-popup>
 
@@ -83,16 +79,11 @@ const onSubmit = (values) => {
           placeholder="点击选择时间"
           @click="showTimePicker = true"
         />
-        <van-popup :show="showTimePicker" position="bottom">
+        <van-popup :show="showTimePicker" position="bottom" @click-overlay="showTimePicker = false">
           <van-time-picker
+            v-model="times"
+            :show-toolbar="false"
             :columns-type="['hour', 'minute', 'second']"
-            @confirm="
-              ({ selectedValues }) => {
-                time = selectedValues.join(':')
-                showTimePicker = false
-              }
-            "
-            @cancel="showTimePicker = false"
           />
         </van-popup>
       </van-cell-group>
