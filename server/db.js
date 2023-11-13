@@ -12,7 +12,7 @@ let yesterday = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
 const yesterdayDateStr = toLocaleDateString(yesterday);
 
-const specificDay = new Date(2023, 8, 8, 7, 30, 0);
+const specificDay = new Date(2023, 10, 9, 7, 30, 0);
 const specificDayDateStr = toLocaleDateString(specificDay);
 
 let courses = [
