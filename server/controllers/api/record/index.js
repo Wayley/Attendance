@@ -2,28 +2,10 @@
 
 const express = require('express');
 const router = express.Router();
+const { courses } = require('../../../db');
+const { toLocaleString } = require('../../../util/DateTimeHelper');
 
-const today = new Date();
-
-let yesterday = new Date();
-yesterday.setDate(yesterday.getDate() - 1);
-
-let dayBeforeYesterday = new Date();
-dayBeforeYesterday.setDate(dayBeforeYesterday.getDate() - 2);
-
-const todayStr = today.toLocaleString();
-const todayDateStr = today.toLocaleDateString();
-const yesterdayDateStr = yesterday.toLocaleDateString();
-const dayBeforeYesterdayDateStr = dayBeforeYesterday.toLocaleDateString();
-
-let records = [
-  { id: 151, createAt: `${todayStr}`, dateTime: `${dayBeforeYesterdayDateStr} 10:00:00`, type: 10, status: 1 },
-  { id: 152, createAt: `${todayStr}`, dateTime: `${dayBeforeYesterdayDateStr} 15:30:00`, type: 20, status: 0 },
-  { id: 153, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 8:30:00`, type: 10, status: 1 },
-  { id: 154, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 10:00:00`, type: 20, status: 1 },
-  { id: 155, createAt: `${todayStr}`, dateTime: `${yesterdayDateStr} 17:30:00`, type: 10, status: 0 },
-  { id: 156, createAt: `${todayStr}`, dateTime: `${todayDateStr} 8:30:00`, type: 20, status: 1 },
-];
+let records = [...courses];
 
 function getList() {
   return records;
@@ -31,7 +13,7 @@ function getList() {
 function create(req) {
   let { id } = records[records.length - 1];
   const { date, time, type } = req.body;
-  const createAt = new Date().toLocaleString();
+  const createAt = toLocaleString(new Date());
   const record = { dateTime: `${date} ${time}`, type, id: id + 1, createAt, status: 0 };
   records.push(record);
   return record;
