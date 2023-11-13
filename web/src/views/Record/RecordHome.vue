@@ -3,6 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import NavBar from '@/views/components/NavBar.vue'
 import { useRecordFetch } from '@/services/record'
 import { minDate } from '@/config'
+import { toLocaleDateString } from '@/util/DateTimeHelper'
 
 const currentDate: Date = new Date()
 const remarkCalendar: CalendarInstance = ref(null)
@@ -18,8 +19,8 @@ function format(data) {
   let result = {}
   if (data) {
     data.forEach((item) => {
-      const { dateTime } = item
-      const [date] = dateTime.split(' ')
+      const { startTime } = item
+      const [date] = startTime.split(' ')
       if (Object.hasOwn(result, date)) {
         result[date].push(item)
       } else {
@@ -47,22 +48,22 @@ function format(data) {
         :formatter="(day) => ({ ...day, type: 'disabled' })"
       >
         <template #bottom-info="{ date }">
-          <template v-if="Object.hasOwn(dataTree, date.toLocaleDateString())">
+          <template v-if="Object.hasOwn(dataTree, toLocaleDateString(date))">
             <template v-for="(list, key) in dataTree">
-              <div v-if="date.toLocaleDateString() == key" :key="key">
+              <div v-if="toLocaleDateString(date) == key" :key="key">
                 <div
                   v-for="({ type, status }, key) in list"
                   :key="key"
                   :class="[
                     'dot',
                     {
-                      'dot-green': type == 10,
-                      'dot-yellowgreen': type == 20,
-                      'text-through': status == 1
+                      'dot-green': type == 1,
+                      'dot-yellowgreen': type == 2,
+                      'text-through': status == 13
                     }
                   ]"
                 >
-                  {{ type == 10 ? '感统' : '全脑' }}
+                  {{ type == 1 ? '感统' : '全脑' }}
                 </div>
               </div>
             </template>
